@@ -1,0 +1,54 @@
+{% extends "layout.html" %} {% block body %}
+
+<h2>Users</h2>
+<div class="container" style="width: 80%">
+<div class="d-flex justify-content-center">
+    <form class="w-100 me-3" role="search" action="/users/search">
+        <input name="username" type="search" class="form-control mb-2" placeholder="Search..."
+        value={{ request.values.get("username") or "" }}>
+        <input type="submit"class="btn btn-primary">
+    </form>
+</div>
+
+{% if user is defined and user != None %}
+
+<div class="row row-cols-2 row g-2">
+    <div class="col">
+        <p class="lead mb-4">
+        User login: {{ user['login']}}
+        </p>
+        <p class="lead mb-4">
+        User name: {{ user['name']}}
+        </p>
+        <p class="lead mb-4">
+        Favourite languages: #TODO
+        </p>
+        <p class="lead mb-4">
+        Company: {{ user['company']}}
+        </p>
+        <p class="lead mb-4">
+        Biography: {{ user['bio']}}
+        </p>
+    </div>
+    <div class="col">
+    <img class="img-thumbnail" style="width: 200px" src="{{ user['avatar_url'] }}">
+    </div>  
+</div>
+<div class="row row-cols-1 row g-2">
+    <div class="col">
+        <p class="lead mb-4">
+        Repositories:
+        <ul>
+            {% for repo in user['repos'] %}
+            <li>repo {{repo['name']}}</li>
+            {% endfor %}
+        </ul>
+        </p>
+    </div>
+</div>
+
+{% endif %}
+</div>
+<br>
+<p></p>
+{% endblock %}
