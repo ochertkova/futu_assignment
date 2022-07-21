@@ -2,13 +2,13 @@
 
 <h2>Users</h2>
 <div class="container" style="width: 80%">
-<div class="d-flex justify-content-center">
-    <form class="w-100 me-3" role="search" action="/users/search">
-        <input name="username" type="search" class="form-control mb-2" placeholder="Search..."
-        value={{ request.values.get("username") or "" }}>
-        <input type="submit"class="btn btn-primary">
-    </form>
-</div>
+    <div class="d-flex justify-content-center">
+        <form class="w-100 me-3" role="search" action="/users/search">
+            <input name="username" type="search" class="form-control mb-2" placeholder="Search..."
+            value={{ request.values.get("username") or "" }}>
+            <input type="submit"class="btn btn-primary">
+        </form>
+    </div>
 
 {% if user is defined and user != None %}
 
@@ -21,7 +21,13 @@
         User name: {{ user['name']}}
         </p>
         <p class="lead mb-4">
-        Favourite languages: #TODO
+        Favourite languages: 
+        {% for l in lang %}
+        {% if l != lang[0] %}
+        |
+        {% endif %}
+        {{ l['name'] }}
+        {% endfor %}
         </p>
         <p class="lead mb-4">
         Company: {{ user['company']}}
@@ -37,12 +43,20 @@
 <div class="row row-cols-1 row g-2">
     <div class="col">
         <p class="lead mb-4">
-        Repositories:
-        <ul>
-            {% for repo in user['repos'] %}
-            <li>repo {{repo['name']}}</li>
-            {% endfor %}
-        </ul>
+            <h3>Repositories:</h3>
+        </p>
+            <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
+                
+                    {% for repo in user['repos'] %}
+                    <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios1">
+                        <a href="/repos/{{repo['owner']['login']}}/{{repo['name']}}" class="icon-link d-inline-flex align-items-center">
+                        repo {{repo['name']}}
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                        </a>
+                    <span class="d-block small opacity-50">Language: {{repo['language']}}, Watchers: {{repo['watchers']}}</span>
+                    </label>
+                    {% endfor %}
+            </div>  
         </p>
     </div>
 </div>

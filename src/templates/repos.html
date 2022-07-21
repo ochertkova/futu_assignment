@@ -1,12 +1,19 @@
 {% extends "layout.html" %} {% block body %}
 
 <h2>Repos</h2>
-<div class="d-flex justify-content-center">
-    <form class="w-100 me-3" role="search">
-        <input type="search" class="form-control " placeholder="Search..." style="width: 70%">
-        
-    </form>
-</div>
+<div class="container" style="width: 80%"></div>
+    <div class="d-flex justify-content-center">
+        <form class="w-100 me-3" role="search">
+            <input name="name" class="form-control " placeholder="Search..." style="width: 70%"
+            value={{ owner and reponame or "" }}>
+            <input type="submit"class="btn btn-primary">
+        </form>
+    </div>
+    {% if repo is defined and repo != None %}
+    <p class="lead mb-4">
+        Repo: {{repo['name']}}
+    </p>
+    {% endif %}
 <br>
 <p></p>
 {% endblock %}
