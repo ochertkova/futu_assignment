@@ -1,8 +1,3 @@
-from matplotlib import pyplot as plt
-import numpy as np
-
-
-
 def fav_languages(user):
     fav_lang_dict = {}
     if user:
