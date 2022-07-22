@@ -3,16 +3,47 @@
 <h2>Repos</h2>
 <div class="container" style="width: 80%"></div>
     <div class="d-flex justify-content-center">
-        <form class="w-100 me-3" role="search">
+        <form class="w-100 me-3" role="search" action="/repos/search">
             <input name="name" class="form-control " placeholder="Search..." style="width: 70%"
-            value={{ owner and reponame or "" }}>
+            value={{ reponame or "" or request.values.get("name") }}>
             <input type="submit"class="btn btn-primary">
         </form>
     </div>
     {% if repo is defined and repo != None %}
     <p class="lead mb-4">
-        Repo: {{repo['name']}}
+    <h2>Repo: {{repo['name']}}</h2>
     </p>
+    <div class="row row-cols-2 row g-2">
+        <div class="col">
+            <h3>Info:</h3>
+            <p class="lead mb-4">
+            Owner:<a href="/users/{{repo['owner']['login']}}">{{repo['owner']['login']}}</a>
+            </p>
+            <p class="lead mb-4">
+            Description: {{repo['description']}}
+            </p>
+            <p class="lead mb-4">
+            Main language: {{repo['language']}}
+            </p>
+            <p class="lead mb-4">
+            Created at: {{dates['created_at']}}
+            </p>
+            <p class="lead mb-4">
+            Updated at: {{dates['updated_at']}}
+            </p>
+            <p class="lead mb-4">
+            Watchers: {{repo['watchers_count']}}
+            </p>
+        </div>
+        <div class="col">
+            <h3>All repo languages:</h3>
+            {% for lang in repo['languages'] %}
+            <p class="lead mb-4">
+             {{lang}}
+            </p>
+            {% endfor %}
+        </div>
+    </div>
     {% endif %}
 <br>
 <p></p>

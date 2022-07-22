@@ -50,7 +50,7 @@
                     {% for repo in user['repos'] %}
                     <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios1">
                         <a href="/repos/{{repo['owner']['login']}}/{{repo['name']}}" class="icon-link d-inline-flex align-items-center">
-                        repo {{repo['name']}}
+                        {{repo['name']}}
                         <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
                         </a>
                     <span class="d-block small opacity-50">Language: {{repo['language']}}, Watchers: {{repo['watchers']}}</span>
