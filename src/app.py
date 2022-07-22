@@ -33,7 +33,8 @@ def show_repo(owner,reponame):
     if github_repo:
         cr_d = utils.format_date(github_repo['created_at'])
         up_d = utils.format_date(github_repo['updated_at'])
-        dates = {'created_at': cr_d, 'updated_at':up_d}
+        p_d = utils.format_date(github_repo['pushed_at'])
+        dates = {'created_at': cr_d, 'updated_at':up_d, 'pushed_at':p_d}
 
     return render_template("repos.html", owner=owner, repo=github_repo, dates=dates)
 
