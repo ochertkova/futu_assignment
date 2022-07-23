@@ -11,17 +11,22 @@ def index():
 
 @app.route("/users")
 def users():
+
     return render_template("users.html")
 
 @app.route("/users/<username>")
 def get_user(username):
     github_user = github.get_user(username)
-    fav_languages = stats.fav_languages(github_user)
-    return render_template("users.html", user=github_user,lang=fav_languages)
+    if github_user:
+        fav_languages = stats.fav_languages(github_user)
+        return render_template("users.html", user=github_user,lang=fav_languages)
+    return render_template("users.html", username=username, errorStatus='NOT_FOUND')
+    
     
 @app.route("/users/search")
 def search_user():
-    return get_user(request.values.get('username'))
+    req_values = request.values
+    return redirect("/users/{}".format(req_values['username']), code=302)
 
 @app.route("/repos")
 def repos():
@@ -35,8 +40,13 @@ def show_repo(owner,reponame):
         up_d = utils.format_date(github_repo['updated_at'])
         p_d = utils.format_date(github_repo['pushed_at'])
         dates = {'created_at': cr_d, 'updated_at':up_d, 'pushed_at':p_d}
+        return render_template("repos.html", owner=owner, reponame=reponame, repo=github_repo, dates=dates)
+    return render_template("repos.html", owner=owner, reponame=reponame, errorStatus='NOT_FOUND')
 
-    return render_template("repos.html", owner=owner, repo=github_repo, dates=dates)
+@app.route("/repos/search")
+def search_repo():
+    req_values = request.values
+    return redirect("/repos/{}/{}".format(req_values['owner'],req_values['reponame']), code=302)
 
 @app.route("/about")
 def about():

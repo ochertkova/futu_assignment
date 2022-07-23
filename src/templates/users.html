@@ -3,12 +3,18 @@
 <h2>Users</h2>
 <div class="container" style="width: 80%">
     <div class="d-flex justify-content-center">
-        <form class="w-100 me-3" role="search" action="/users/search">
-            <input name="username" type="search" class="form-control mb-2" placeholder="Search..."
+        <form class="w-100 me-3 needs-validation" role="search" action="/users/search">
+            <input name="username" type="search" class="form-control mb-2" required placeholder="Search..."
             value={{ request.values.get("username") or "" }}>
             <input type="submit"class="btn btn-primary">
         </form>
     </div>
+
+{% if errorStatus is defined and errorStatus == 'NOT_FOUND' %}
+Page for User {{username}} not found.
+Please check the spelling and try again.
+{% endif %}
+
 
 {% if user is defined and user != None %}
 

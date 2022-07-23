@@ -3,12 +3,23 @@
 <h2>Repos</h2>
 <div class="container" style="width: 80%"></div>
     <div class="d-flex justify-content-center">
-        <form class="w-100 me-3" role="search" action="/repos/search">
-            <input name="name" class="form-control " placeholder="Search..." style="width: 70%"
-            value={{ reponame or "" or request.values.get("name") }}>
+        <form class="w-100 me-3 needs-validation" role="search" action="/repos/search">
+            <p>Enter owner name:</p>
+            <input name="owner" class="form-control" required placeholder="Search..." style="width: 40%"
+            value={{ owner or ""}}>
+            <p>Enter repo name:</p>
+            <input name="reponame" class="form-control" required placeholder="Search..." style="width: 40%"
+            value={{ reponame or ""}}>
             <input type="submit"class="btn btn-primary">
+
         </form>
     </div>
+
+    {% if errorStatus is defined and errorStatus == 'NOT_FOUND' %}
+    Page for Owner {{owner}} and Repo name {{reponame}} not found.
+    Please check the spelling and try again.
+    {% endif %}
+
     {% if repo is defined and repo != None %}
     <p class="lead mb-4">
     <h2>Repo: {{repo['name']}}</h2>
