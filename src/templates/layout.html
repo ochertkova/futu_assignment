@@ -73,7 +73,7 @@
 
                 <li><a href="/" {% if request.path == '/' %} class="nav-link active" {%else%}class="nav-link"{% endif %}>Home</a></li>
                 <li><a href="/users" {% if request.path.startswith('/users') %} class="nav-link active"{%else%}class="nav-link"{% endif %}>Users</a></li>
-                <li><a href="/repos" {% if request.path == '/repos' %} class="nav-link active"{%else%}class="nav-link"{% endif %}>Repos</a></li>
+                <li><a href="/repos" {% if request.path.startswith('/repos') %} class="nav-link active"{%else%}class="nav-link"{% endif %}>Repos</a></li>
                 <li><a href="/about" {% if request.path == '/about' %} class="nav-link active"{%else%}class="nav-link"{% endif %}>About</a></li>
               </ul>
         

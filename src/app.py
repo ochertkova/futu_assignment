@@ -11,7 +11,6 @@ def index():
 
 @app.route("/users")
 def users():
-
     return render_template("users.html")
 
 @app.route("/users/<username>")
@@ -26,6 +25,7 @@ def get_user(username):
 @app.route("/users/search")
 def search_user():
     req_values = request.values
+    #Redirect search request to resourse path by username
     return redirect("/users/{}".format(req_values['username']), code=302)
 
 @app.route("/repos")
@@ -46,6 +46,7 @@ def show_repo(owner,reponame):
 @app.route("/repos/search")
 def search_repo():
     req_values = request.values
+    #Redirect search request to resourse path by owner/reponame
     return redirect("/repos/{}/{}".format(req_values['owner'],req_values['reponame']), code=302)
 
 @app.route("/about")
