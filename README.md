@@ -3,4 +3,4 @@ My Github repo browser for [Futurice Academy 2022](https://github.com/futurice/f
 
 I will add my version of the assingment in this repo
 
-Working version will be available at the address https://olga-futu2022.herokuapp.com/
+Working version will be available at https://simple-github-user-search.azurewebsites.net/
