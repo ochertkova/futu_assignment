@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/f8e8575e-2cc3-4358-9071-9a150094dada/AppServices/subscriptions/f8e8575e-2cc3-4358-9071-9a150094dada/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/simple-github-user-search",
+    "appService.deploySubpath": "."
+}
